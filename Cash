@@ -1,0 +1,44 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <math.h>
+int main(void)
+{
+    //ask for imput and loop until valid
+    float change;
+    do
+    {
+        change = get_float("what is your change: \n");
+    }
+    while (change < 0);
+    //convert to cents
+    int cents = round(change * 100);
+    //intoduce coins
+    int coins = 0;
+    //subtract coins from total cents
+    while
+    (cents >= 25)
+    {
+        cents -= 25;
+        coins++;
+    }
+    while
+    (cents >= 10)
+    {
+        cents -= 10;
+        coins++;
+    }
+    while
+    (cents >= 5)
+    {
+        cents -= 5;
+        coins++;
+    }
+    while
+    (cents >= 1)
+    {
+        cents -= 1;
+        coins++;
+    }
+    printf("%i\n", coins);
+
+}
