@@ -1,0 +1,59 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+int main(int argc, string argv[])
+{
+    //Argc g needs to be 2
+    if (argc != 2)
+    {
+        printf("Usage: ./caesar key\n");
+        return 1;
+    }
+    //now that argc is 2 make sure it's a number greater than zero
+    else if(argc == 2)
+    {
+        //convert string of index 1 into int
+        int key= atoi(argv[1]);
+        //assume true so far if not true print an error
+        bool valid_key = true;
+        //length of key
+        int length = strlen(argv[1]);
+        // scan for non number characters
+        for (int num_scan = 0; num_scan < length; num_scan++)
+        {
+            if (isdigit(argv[1][num_scan]) == false)
+            {
+                valid_key = false;
+                printf("Usage: ./caesar key\n");
+                return 1;
+            }
+        }
+        if(valid_key == true)
+        {
+            //scan string for letters and leave out anything else
+            string plain_text = get_string("plain text:");
+            printf("ciphertext: ");
+            //string length
+            int plain_length = strlen(plain_text);
+            for (int plain_scan = 0; plain_scan < plain_length; plain_scan++)
+            {
+                //upper case scan and print new letter
+                if (isupper(plain_text[plain_scan]))
+                {
+                    printf("%c",(plain_text[plain_scan] - 'A' +key) %26 + 'A');
+                }
+                //lower case scan and print new letter
+                else if(islower(plain_text[plain_scan]))
+                {
+                    printf("%c",(plain_text[plain_scan] - 'a' +key) %26 + 'a');
+                }
+                //keep all non-alphabetic symbols the same
+                else
+                    printf("%c", plain_text[plain_scan]);
+            }
+            printf("\n");
+        }
+    }
+}
